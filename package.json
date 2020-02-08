@@ -1,0 +1,36 @@
+{
+  "name": "discord-upvote-webhook",
+  "private": true,
+  "version": "1.0.0",
+  "description": "a simple WebHook receiver to catch users' votes coming from bots lists related to Discord, such as Top.gg.",
+  "main": "src/app.js",
+  "author": "UniX Technology Corporation",
+  "bugs": {
+    "url": "https://github.com/SFallTech/Discord-Upvote-WebHook/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SFallTech/Discord-Upvote-WebHook.git"
+  },
+  "keywords": [
+    "discord",
+    "webhook",
+    "upvote"
+  ],
+  "scripts": {
+    "start": "node .",
+    "start:staging": "pm2 start",
+    "lint:eslint": "eslint .",
+    "lint:eslint:fix": "eslint . --fix"
+  },
+  "dependencies": {
+    "eslint": "^6.8.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "axios": "^0.19.0",
+    "dateformat": "^3.0.3",
+    "helmet": "^3.20.0",
+    "long": "^4.0.0"
+  }
+}
