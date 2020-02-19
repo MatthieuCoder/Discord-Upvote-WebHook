@@ -81,9 +81,9 @@ class WebhookServer {
   }
 
   listen() {
-    return this.app.listen(process.env.PORT || this.config.website.port || 3000, (err) => {
+    return this.app.listen(process.env.PORT || 3000, (err) => {
       if (err) return this.utils.logger.error(err);
-      console.log(`[Server] - Running on port :::${process.env.PORT || this.config.website.port || 3000}`);
+      console.log(`[Server] - Running on port :::${process.env.PORT || 3000}`);
     });
   }
 }
