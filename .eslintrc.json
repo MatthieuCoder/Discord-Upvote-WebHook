@@ -19,7 +19,10 @@
     ],
     "block-spacing": "error",
     "camelcase": [
-      "error"
+      "error",
+      {
+        "allow": ["icon_url"]
+      }
     ],
     "comma-dangle": [
       "error",
