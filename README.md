@@ -1,6 +1,10 @@
 # Discord Upvote WebHook
 This web server is a simple WebHook receiver to catch users' votes coming from bots lists related to Discord, such as `Top.gg`.
 
+[![CodeFactor](https://www.codefactor.io/repository/github/sfalltech/discord-upvote-webhook/badge)](https://www.codefactor.io/repository/github/sfalltech/discord-upvote-webhook)
+[![Discord Server](https://discordapp.com/api/guilds/438860643685367809/embed.png)](https://discord.gg/xg4kXd2)
+[![Donate on PayPal](https://img.shields.io/badge/paypal-donate-blue.svg)](https://paypal.me/unixcorp)
+
 # Table of Contents
 - [How to use](#How-to-use)
 
