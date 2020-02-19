@@ -88,4 +88,4 @@ class WebhookServer {
   }
 }
 
-module.exports = new WebhookServer();
+module.exports = WebhookServer;
