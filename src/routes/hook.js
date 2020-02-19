@@ -27,7 +27,7 @@ class Hook extends Route {
 
       axios({
         method:'get',
-        url:`https://discordapp.com/api/users/${(typeof req.body.user === 'string' ? req.body.user : req.body.user)}`,
+        url:`https://discordapp.com/api/users/${(typeof req.body.user === 'string' ? req.body.user : req.body.user.id)}`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bot BOT_TOKEN'
@@ -39,7 +39,7 @@ class Hook extends Route {
         const Message = new MessageEmbed()
           .setDescription(`[**Upvote**](https://${this.config.lists.find(((list) => list.path === `/${req.params.path}`)).upvoteURL ? this.config.lists.find(((list) => list.path === `/${req.params.path}`)).upvoteURL : null})\n**  **\n:incoming_envelope: \`${discordUser.data.username}#${discordUser.data.discriminator}\` just upvoted \`BOT_NAME\`.`)
           .setColor(0xffffff)
-          .setThumbnail(`https://cdn.discordapp.com/avatars/${(typeof req.body.user === 'string' ? req.body.user : req.body.user)}/${discordUser.data.avatar}.${format}?size=512`)
+          .setThumbnail(`https://cdn.discordapp.com/avatars/${(typeof req.body.user === 'string' ? req.body.user : req.body.user.id)}/${discordUser.data.avatar}.${format}?size=512`)
           .setFooter(this.config.lists.find(((list) => list.path === `/${req.params.path}`)).name, `https://cdn.discordapp.com/avatars/${(typeof req.body.user === 'string' ? req.body.user : req.body.user.id)}/${discordUser.data.avatar}.${format}?size=512`)
           .setTimestamp();
 
