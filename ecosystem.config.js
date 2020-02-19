@@ -2,7 +2,7 @@ module.exports = {
   apps: [
     {
       name: 'webhook-server',
-      script: './src/app.js'
+      script: './src/index.js'
     }
   ]
 };
