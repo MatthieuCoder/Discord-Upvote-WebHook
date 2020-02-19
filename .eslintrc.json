@@ -21,7 +21,7 @@
     "camelcase": [
       "error",
       {
-        "allow": ["icon_url"]
+        "allow": ["icon_url", "avatar_url"]
       }
     ],
     "comma-dangle": [
