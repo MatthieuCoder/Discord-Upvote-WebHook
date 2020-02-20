@@ -20,27 +20,37 @@ class Hook extends Route {
   }
 
   setupRoutes() {
-    this.router.post('/:path', (req, res) => {
-      const path = this.config.lists.find((list) => list.path === `/${req.params.path}`);
-      if (!path) return res.status(404).json({ error: true, status: 404, message: 'Invalid Path.' });
-      if (req.get('Authorization') !== path.token) return res.status(401).json({ error: true, status: 401, message: 'Authorization Header missing or invalid token.' });
+    this.router.post('/:path', this.getSite(), this.checkAuthorization(), (req, res) => {
+      const site = res.locals.site;
+
+      if (!('user' in req.body)) return res.status(400).json({ error: true, statusCode: 404, message: 'No user data in query.' });
+
+      let userID;
+
+      if (typeof req.body.user === 'string') {
+        userID = req.body.user;
+      } else if (typeof req.body.user === 'object' && req.body.user.id) {
+        userID = req.body.user.id
+      }
 
       axios({
         method:'get',
-        url:`https://discordapp.com/api/users/${(typeof req.body.user === 'string' ? req.body.user : req.body.user.id)}`,
+        url:`https://discordapp.com/api/users/${userID}`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bot BOT_TOKEN'
         },
         responseType:'JSON'
-      }).then((discordUser) => {
-        const format = discordUser.data.avatar && discordUser.data.avatar.startsWith('a_') ? 'gif' : 'png';
+      }).then((body) => {
+        const fetchedUser = body.data;
+        const avatarFormat = fetchedUser.avatar && fetchedUser.avatar.startsWith('a_') ? 'gif' : 'png';
 
         const Message = new MessageEmbed()
-          .setDescription(`[**Upvote**](https://${this.config.lists.find(((list) => list.path === `/${req.params.path}`)).upvoteURL ? this.config.lists.find(((list) => list.path === `/${req.params.path}`)).upvoteURL : null})\n**  **\n:incoming_envelope: \`${discordUser.data.username}#${discordUser.data.discriminator}\` just upvoted \`BOT_NAME\`.`)
-          .setColor(0xffffff)
-          .setThumbnail(`https://cdn.discordapp.com/avatars/${(typeof req.body.user === 'string' ? req.body.user : req.body.user.id)}/${discordUser.data.avatar}.${format}?size=512`)
-          .setFooter(this.config.lists.find(((list) => list.path === `/${req.params.path}`)).name, `https://cdn.discordapp.com/avatars/${(typeof req.body.user === 'string' ? req.body.user : req.body.user.id)}/${discordUser.data.avatar}.${format}?size=512`)
+          .setAuthor(site.name, site.icon)
+          .setDescription(`:incoming_envelope: \`${fetchedUser.username}#${fetchedUser.discriminator}\` just [upvoted](https://${site.upvoteURL}) \`BOT_NAME\`.`)
+          .setColor(0x7289DA)
+          .setThumbnail(`https://cdn.discordapp.com/avatars/${fetchedUser.id}/${fetchedUser.avatar}.${avatarFormat}?size=512`)
+          .setFooter(site.name, `https://cdn.discordapp.com/avatars/${fetchedUser.id}/${fetchedUser.avatar}.${avatarFormat}?size=512`)
           .setTimestamp();
 
         this.webhook.send(null, this.config.webhook.name, this.config.webhook.avatar, Message.embed);
