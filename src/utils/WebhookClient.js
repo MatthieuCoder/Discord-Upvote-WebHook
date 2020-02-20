@@ -15,7 +15,7 @@ class WebhookClient {
    * @param {string} token token of the webhook
    */
   constructor(id, token) {
-    if (!id) throw new Error('No id found!');
+    if (!id) throw new Error('[WebhookClient] No ID provided');
 
     /**
      * The ID of the webhook
@@ -23,7 +23,7 @@ class WebhookClient {
      */
     this.id = id;
 
-    if (!token) throw new Error('No token found!');
+    if (!token) throw new Error('[WebhookClient] No token provided');
 
     /**
      * The token for the webhook
@@ -41,9 +41,9 @@ class WebhookClient {
    * @returns {void}
    */
   async send(message = null, name = null, avatar = null, embed = []) {
-    if (!message && embed.length === 0) throw new Error('You cannot send an empty message.');
+    if (!message && embed.length === 0) throw new Error('[WebhookClient] You cannot send an empty message.');
 
-    await axios({
+    return await axios({
       method: 'post',
       url: `${baseURL}/${this.id}/${this.token}`,
       data: {
@@ -55,7 +55,7 @@ class WebhookClient {
     })
       .then()
       .catch((err) => {
-        if (err) throw new Error(`Error:\n${err}`);
+        if (err) throw new Error(`[WebhookClient] ${err}`);
       });
   }
 }
