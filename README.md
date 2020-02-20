@@ -36,7 +36,8 @@ To have the WebHook ID and its token copy the URL given on the WebHook panel
   name: 'Top.gg | Discord Bot List', // A desired name for the Embed
   path: '/dbl', // A desired path
   token: '', // Add your API token given by the bots list
-  upvoteURL: 'top.gg/bot/BotID/vote' // Replace 'BotID' by your bot's ID
+  upvoteURL: 'top.gg/bot/BotID/vote', // Replace 'BotID' by your bot's ID
+  icon: 'https://top.gg/images/dblnew.png' // A desired icon of the website
 }
 ```
 
@@ -45,5 +46,9 @@ To have the WebHook ID and its token copy the URL given on the WebHook panel
 # How to launch
 
 - If you are not using PM2 run the command `npm run start` to launch the web server with Node.js. The server will run on port 5000 (This can be changed in the configuration file).
-
 - If you are using PM2 run the command `npm run start:staging` to launch the web server with PM2. The server will run on port 5000 (This can be changed in the configuration file).
+
+The server will be available at this adress https://host:5000/.
+
+In the parameters of your bot, available on the site of the list insert this link followed by the chosen PATH for the request to be posted there.
+> `URL example:` https://host:5000/webhook/dbl for Discord Bot List (Top.gg)
