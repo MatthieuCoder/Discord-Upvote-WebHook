@@ -53,10 +53,19 @@ class Hook extends Route {
           .setFooter(site.name, `https://cdn.discordapp.com/avatars/${fetchedUser.id}/${fetchedUser.avatar}.${avatarFormat}?size=512`)
           .setTimestamp();
 
-        this.webhook.send(null, this.config.webhook.name, this.config.webhook.avatar, Message.embed);
-        return res.status(200).json({ error: false, status: 200, message: 'OK!' });
+        this.webhook.send(null, this.config.webhook.name, this.config.webhook.avatar, Message.embed).then(() => {
+          return res.status(200).json({ error: false, statusCode: 200, message: 'Successfully sent to Discord.' });
+        });
+      }).catch(async (error) => {
+        if (error.statusCode === 404) {
+          res.status(404).json({ error: true, statusCode: 404, message: 'The user ID submitted does not exist on Discord', stack: error.stack });
+          this.utils.logger.error({ error: true, statusCode: 404, message: 'The user ID submitted does not exist on Discord', stack: error.stack });
+        } else {
+          res.status(500).json({ error: true, statusCode: 500, message: 'Something went wrong while performing the request', stack: error.stack });
+          this.utils.logger.error({ error: true, statusCode: 500, message: 'FSomething went wrong while performing the request', stack: error.stack });
+        }
       });
-    });
+    })
   }
 
   getSite() {
