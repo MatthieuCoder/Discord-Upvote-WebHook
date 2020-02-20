@@ -48,6 +48,26 @@ class Hook extends Route {
       });
     });
   }
+
+  getSite() {
+    return async (req, res, next) => {
+      const site = this.config.lists.find((list) => list.path === `/${req.params.path}`);
+
+      if (!site) return res.status(404).json({ error: true, statusCode: 404, message: 'An invalid was PATH.' });
+
+      res.locals.site = site;
+      next();
+    };
+  }
+
+  checkAuthorization() {
+    return (req, res, next) => {
+      if (!req.get('Authorization')) return res.status(401).json({ error: true, statusCode: 401, message: 'Missing Authorization header' });
+      if (req.get('Authorization') !== res.locals.site.token) return res.status(401).json({ error: true, statusCode: 401, message: 'An invalid Authorization token was provided.' });
+
+      next();
+    };
+  }
 }
 
 module.exports = Hook;
