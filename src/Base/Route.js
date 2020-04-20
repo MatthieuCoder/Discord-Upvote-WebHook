@@ -1,7 +1,10 @@
+const { Router } = require('express');
+
 class Route {
-  constructor(options) {
-    this.route = options.route;
-  }
+	constructor(options) {
+		this.path = options.path;
+		this.router = Router();
+	}
 }
 
 module.exports = Route;

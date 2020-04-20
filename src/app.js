@@ -77,7 +77,7 @@ class WebhookServer {
 
 				if (i + 1 === routes.length) {
 					for (i = 0; i < this.routers.length; i++) {
-						this.app.use(this.routers[i].route, this.routers[i].router);
+						this.app.use(this.routers[i].path, this.routers[i].router);
 
 						if (i + 1 === this.routers.length) {
 							this.app.use(async (req, res) => {
