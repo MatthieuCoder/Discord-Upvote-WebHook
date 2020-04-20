@@ -1,4 +1,4 @@
-const { Router } = require('express');
+const { Router } = require('./node_modules/express');
 
 class Route {
 	constructor(options) {

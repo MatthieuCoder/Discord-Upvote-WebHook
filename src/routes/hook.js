@@ -1,5 +1,5 @@
 const { get } = require('axios');
-const Route = require('../base/route');
+const Route = require('../base/Route');
 const { WebhookClient, MessageEmbed } = require('../utils');
 
 class Hook extends Route {
