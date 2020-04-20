@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @typedef Utils
  * @property {import("./MessageEmbed").MessageEmbed} MessageEmbed
@@ -9,8 +7,8 @@
  */
 
 module.exports = {
-  MessageEmbed: require('./MessageEmbed'),
-  logger: require('./logger'),
-  Snowflake: require('./Snowflake'),
-  WebhookClient: require('./WebhookClient')
+	MessageEmbed: require('./MessageEmbed'),
+	logger: require('./logger'),
+	Snowflake: require('./Snowflake'),
+	WebhookClient: require('./WebhookClient')
 };
