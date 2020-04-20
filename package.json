@@ -1,6 +1,6 @@
 {
 	"name": "discord-upvote-webhook",
-	"version": "1.7.0",
+	"version": "1.7.2",
 	"description": "A simple WebHook receiver to catch users' votes coming from bots lists related to Discord, such as top.gg.",
 	"main": "src/app.js",
 	"author": "UniX Technology Corporation",
