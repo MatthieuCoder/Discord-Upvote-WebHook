@@ -8,6 +8,10 @@ module.exports = {
 			icon: 'https://top.gg/images/dblnew.png'
 		}
 	],
+	bot: {
+		name: '',
+		token: ''
+	},
 	webhook: {
 		id: '',
 		avatar: '',
